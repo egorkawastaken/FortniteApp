@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/profileFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.fortniteapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/profileFragment"
+        android:name="main.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fr_profile" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.fortniteapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/battlePassFragment"
+        android:name="main.battlepass.BattlePassFragment"
+        android:label="Battle Pass"
+        tools:layout="@layout/fr_battle_pass" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.fortniteapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/shopFragment"
+        android:name="main.shop.ShopFragment"
+        android:label="Shop"
+        tools:layout="@layout/fr_shop" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="main.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fr_settings" />
 </navigation>

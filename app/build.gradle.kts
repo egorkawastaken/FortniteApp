@@ -44,12 +44,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
-    // Navigation Component
-    implementation(libs.androidx.navigation.fragment.ktx.v274)
-    implementation(libs.androidx.navigation.ui.ktx.v274)
 
     // Material Design
-    implementation(libs.x.x.x)
     implementation(libs.androidx.navigation.ui.ktx)
 
     testImplementation(libs.junit)
