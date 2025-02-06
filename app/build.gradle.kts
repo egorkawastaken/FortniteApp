@@ -48,6 +48,16 @@ dependencies {
     // Material Design
     implementation(libs.androidx.navigation.ui.ktx)
 
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+
+    // ViewModel и LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+
+    // Hilt для работы с ViewModel
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)
