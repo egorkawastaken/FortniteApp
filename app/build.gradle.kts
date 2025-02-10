@@ -51,9 +51,11 @@ dependencies {
     // Dagger Hilt
     implementation(libs.hilt.android)
 
-    // ViewModel и LiveData
-    implementation(libs.androidx.lifecycle.viewmodel.ktx.v261)
-    implementation(libs.androidx.lifecycle.livedata.ktx.v261)
+
+    // Network
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     // Hilt для работы с ViewModel
     implementation(libs.androidx.hilt.lifecycle.viewmodel)
