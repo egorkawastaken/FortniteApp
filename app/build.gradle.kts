@@ -49,14 +49,15 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.48")
+    implementation(libs.hilt.android)
 
     // ViewModel и LiveData
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v261)
+    implementation(libs.androidx.lifecycle.livedata.ktx.v261)
 
     // Hilt для работы с ViewModel
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.process)
 
     testImplementation(libs.junit)
 

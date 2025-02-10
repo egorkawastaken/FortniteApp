@@ -1,12 +1,15 @@
 package main.common.base
 
 import android.util.Log
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asFlow
@@ -17,13 +20,18 @@ import main.common.utils.BaseScopeContainer
 import main.common.utils.DefaultContextProvider
 import main.common.utils.ScopeProvider
 
-abstract class BaseViewModel<STATE : Any, ACTION : Any>(
-    private val scopeProvider: ScopeProvider = ScopeProvider(DefaultContextProvider()),
+abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
+    override val processScope: CoroutineScope = ProcessLifecycleOwner.get().lifecycleScope,
+    protected val scopeProvider: ScopeProvider = ScopeProvider(DefaultContextProvider()),
     initialState: STATE
-) : ViewModel(), BaseScopeContainer {
+) : ViewModel(scopeProvider), BaseScopeContainer {
 
     final override val mainScope: CoroutineScope = scopeProvider.mainScope
     final override val ioScope: CoroutineScope = scopeProvider.ioScope
+
+    init {
+        subscribeToEvents()
+    }
 
     private val _viewStates = MutableStateFlow(initialState)
     val viewStates: StateFlow<STATE> = _viewStates
@@ -31,6 +39,9 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any>(
 
     private val _viewActions = MutableSharedFlow<ACTION>(replay = 0)
     val viewActions: Flow<ACTION> = _viewActions.asSharedFlow()
+
+    private val _events = MutableSharedFlow<EVENT>(extraBufferCapacity = 64)
+    val events: SharedFlow<EVENT> = _events.asSharedFlow()
 
     protected var viewState: STATE
         get() = _viewStates.value
@@ -44,8 +55,20 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any>(
         }
     }
 
+    protected abstract fun onEvent(event: EVENT)
+
     protected fun logError(throwable: Throwable) {
         Log.e("BaseViewModel", "Error occurred", throwable)
+    }
+
+    fun sendEvent(event: EVENT) {
+        _events.tryEmit(event)
+    }
+
+    private fun subscribeToEvents() {
+        launch {
+            _events.collect { event -> onEvent(event) }
+        }
     }
 
     companion object {
