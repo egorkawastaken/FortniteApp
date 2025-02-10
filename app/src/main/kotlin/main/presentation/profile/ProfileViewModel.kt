@@ -1,8 +1,8 @@
-package main.profile
+package main.presentation.profile
 
 import main.common.base.BaseViewModel
-import main.profile.interactions.ProfileAction
-import main.profile.interactions.ProfileEvent
+import main.presentation.profile.interactions.ProfileAction
+import main.presentation.profile.interactions.ProfileEvent
 
 class ProfileViewModel : BaseViewModel<ProfileViewModel.State, ProfileAction, ProfileEvent>(
     initialState = State(type = State.Type.Loading)
