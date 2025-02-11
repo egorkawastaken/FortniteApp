@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.fortniteapp.databinding.FrProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 import main.common.base.BaseFragment
 import main.presentation.profile.interactions.ProfileAction
 import main.presentation.profile.interactions.ProfileEvent
 
+@AndroidEntryPoint
 class ProfileFragment :
     BaseFragment<FrProfileBinding, ProfileViewModel, ProfileViewModel.State, ProfileAction, ProfileEvent>() {
 

@@ -15,12 +15,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        buildConfigField("String", "BASE_URL", "\"${project.properties["BASE_URL"]}\"")
+
+        buildTypes {
+            debug {
+                buildConfigField("String", "API_KEY", "\"${System.getenv("api.key")}\"")
+            }
+            release {
+                isMinifyEnabled = false
+                proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+                buildConfigField("String", "API_KEY", "\"${System.getenv("api.key")}\"")
+            }
         }
     }
     compileOptions {
@@ -32,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -50,7 +57,6 @@ dependencies {
 
     // Dagger Hilt
     implementation(libs.hilt.android)
-
 
     // Network
     implementation(libs.retrofit)

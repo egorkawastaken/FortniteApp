@@ -40,7 +40,7 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
     private val _viewActions = MutableSharedFlow<ACTION>(replay = 0)
     val viewActions: Flow<ACTION> = _viewActions.asSharedFlow()
 
-    private val _events = MutableSharedFlow<EVENT>(extraBufferCapacity = 64)
+    private val _events = MutableSharedFlow<EVENT>(extraBufferCapacity = DEFAULT_EVENT_CAPACITY)
     val events: SharedFlow<EVENT> = _events.asSharedFlow()
 
     protected var viewState: STATE
@@ -73,5 +73,6 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
 
     companion object {
         private const val SUBSCRIPTION_STOP_TIMEOUT = 5_000L
+        private const val DEFAULT_EVENT_CAPACITY = 64
     }
 }
