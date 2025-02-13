@@ -1,13 +1,16 @@
 package main.common
 
-import com.example.fortniteapp.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
+import javax.inject.Named
 
-class AuthInterceptor : Interceptor {
+class AuthInterceptor @Inject constructor(
+    @Named("apiKey") private val apiKey: String
+) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
-            .addHeader("Authorization", BuildConfig.API_KEY)
+            .addHeader("Authorization", apiKey)
             .build()
         return chain.proceed(request)
     }

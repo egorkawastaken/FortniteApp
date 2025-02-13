@@ -1,7 +1,8 @@
 package main.domain.profile
 
-import main.data.remote.profile.model.ProfileDto
+import main.common.utils.Response
+import main.domain.profile.model.Profile
 
 interface ProfileRepository {
-    suspend fun loadData(accountId: String): ProfileDto
+    suspend fun loadData(accountId: String): Response<Profile>
 }

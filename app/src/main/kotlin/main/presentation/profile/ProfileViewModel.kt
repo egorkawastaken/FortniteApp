@@ -7,7 +7,9 @@ import main.presentation.profile.interactions.ProfileEvent
 
 @HiltViewModel
 class ProfileViewModel : BaseViewModel<ProfileViewModel.State, ProfileAction, ProfileEvent>(
-    initialState = State(type = State.Type.Loading)
+    initialState = State(
+        buttonText = "load data",
+        type = State.Type.Loading)
 ) {
 
     override fun onEvent(event: ProfileEvent) {
@@ -17,6 +19,7 @@ class ProfileViewModel : BaseViewModel<ProfileViewModel.State, ProfileAction, Pr
     }
 
     data class State(
+        val buttonText: String,
         val type: Type
     ) {
         sealed interface Type {

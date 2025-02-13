@@ -1,15 +1,19 @@
 package main.common
 
 import com.example.fortniteapp.BuildConfig
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import main.common.utils.status.Status
+import main.common.utils.status.StatusAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -21,10 +25,15 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(Status::class.java, StatusAdapter())
+            .excludeFieldsWithoutExposeAnnotation()
+            .create()
+
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
@@ -45,8 +54,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthInterceptor(): AuthInterceptor {
-        return AuthInterceptor()
+    @Named("apiKey")
+    fun provideApiKey(): String = BuildConfig.API_KEY
+
+    @Provides
+    @Singleton
+    fun provideAuthInterceptor(@Named("apiKey") apiKey: String): AuthInterceptor {
+        return AuthInterceptor(apiKey)
     }
 
     @Provides

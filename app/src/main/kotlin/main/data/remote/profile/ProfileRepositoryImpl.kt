@@ -1,15 +1,17 @@
 package main.data.remote.profile
 
-import main.data.remote.profile.model.ProfileDto
+import main.common.utils.Response
+import main.data.remote.profile.mapper.ProfileDtoMapper
 import main.domain.profile.ProfileRepository
+import main.domain.profile.model.Profile
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
-    private val api: ProfileApi
+    private val api: ProfileApi,
+    private val profileDtoMapper: ProfileDtoMapper
 ) : ProfileRepository {
 
-    override suspend fun loadData(accountId: String): ProfileDto {
-        api.getAccountStats(accountId)
-        return ProfileDto()
+    override suspend fun loadData(accountId: String): Response<Profile> {
+        return api.getAccountStats(accountId).map(profileDtoMapper)
     }
 }
