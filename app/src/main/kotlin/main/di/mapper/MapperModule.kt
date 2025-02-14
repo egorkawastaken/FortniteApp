@@ -1,4 +1,4 @@
-package main.mappermodule
+package main.di.mapper
 
 import dagger.Module
 import dagger.Provides

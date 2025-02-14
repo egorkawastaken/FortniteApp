@@ -1,4 +1,4 @@
-package main.common.utils.status
+package main.common.network.status
 
 // Enum для статуса
 enum class Status(val code: Int) {

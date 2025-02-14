@@ -41,6 +41,9 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
     val viewActions: Flow<ACTION> = _viewActions.asSharedFlow()
 
     private val _events = MutableSharedFlow<EVENT>(extraBufferCapacity = DEFAULT_EVENT_CAPACITY)
+
+    abstract fun onEvent(event: EVENT)
+
     val events: SharedFlow<EVENT> = _events.asSharedFlow()
 
     protected var viewState: STATE
@@ -54,8 +57,6 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
             _viewActions.emitAll(actions.asFlow())
         }
     }
-
-    protected abstract fun onEvent(event: EVENT)
 
     protected fun logError(throwable: Throwable) {
         Log.e("BaseViewModel", "Error occurred", throwable)

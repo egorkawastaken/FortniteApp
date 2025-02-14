@@ -1,4 +1,4 @@
-package main.common
+package main.common.network
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,8 +1,9 @@
-package main.common.utils
+package main.common.network
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import main.common.utils.status.Status
+import main.common.utils.Mapper
+import main.common.network.status.Status
 
 open class Response<T>(
 

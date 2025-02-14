@@ -1,4 +1,4 @@
-package main.common
+package main.di
 
 import com.example.fortniteapp.BuildConfig
 import com.google.gson.GsonBuilder
@@ -6,8 +6,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import main.common.utils.status.Status
-import main.common.utils.status.StatusAdapter
+import main.common.network.AuthInterceptor
+import main.common.network.status.Status
+import main.common.network.status.StatusAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

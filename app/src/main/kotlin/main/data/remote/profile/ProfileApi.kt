@@ -1,6 +1,6 @@
 package main.data.remote.profile
 
-import main.common.utils.Response
+import main.common.network.Response
 import main.data.remote.profile.model.ProfileDto
 import retrofit2.http.GET
 import retrofit2.http.Path

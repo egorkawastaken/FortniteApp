@@ -1,6 +1,6 @@
 package main.data.remote.profile
 
-import main.common.utils.Response
+import main.common.network.Response
 import main.data.remote.profile.mapper.ProfileDtoMapper
 import main.domain.profile.ProfileRepository
 import main.domain.profile.model.Profile

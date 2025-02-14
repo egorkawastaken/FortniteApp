@@ -1,4 +1,4 @@
-package main.common.utils.status
+package main.common.network.status
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer

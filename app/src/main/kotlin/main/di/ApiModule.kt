@@ -1,4 +1,4 @@
-package main.common
+package main.di
 
 import dagger.Module
 import dagger.Provides
