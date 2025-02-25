@@ -1,18 +1,12 @@
 package main.common.network
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 import main.common.network.status.Status
 import main.common.utils.Mapper
 
+@Serializable
 open class Response<T> (
-
-    @Expose
-    @SerializedName("status")
     val status: Status? = null,
-
-    @Expose
-    @SerializedName("data")
     val data: T? = null
 ) {
 

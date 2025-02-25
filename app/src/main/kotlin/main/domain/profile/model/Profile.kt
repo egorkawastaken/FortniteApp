@@ -26,9 +26,9 @@ data class GameModeStats(
 )
 
 data class ModeStats(
-    val score: Int,
-    val wins: Int,
-    val kills: Int,
-    val kd: Double,
-    val matches: Int
+    val score: Int? = null,
+    val wins: Int? = null,
+    val kills: Int? = null,
+    val kd: Double? = null,
+    val matches: Int? = null
 )

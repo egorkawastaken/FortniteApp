@@ -53,26 +53,26 @@ class StatsDtoMapper @Inject constructor(
     private val gameModeStatsMapper: GameModeStatsDtoMapper
 ) : Mapper<StatsDto, Stats> {
     override fun map(from: StatsDto) = Stats(
-        all = gameModeStatsMapper.map(from.all)
+        all = gameModeStatsMapper.map(from.allDto)
     )
 }
 
 class GameModeStatsDtoMapper @Inject constructor(private val modeStatsMapper: ModeStatsDtoMapper) :
     Mapper<GameModeStatsDto, GameModeStats> {
     override fun map(from: GameModeStatsDto) = GameModeStats(
-        overall = modeStatsMapper.map(from.overall),
-        solo = modeStatsMapper.map(from.solo),
-        duo = modeStatsMapper.map(from.duo),
-        squad = modeStatsMapper.map(from.squad)
+        overall = modeStatsMapper.map(from.overallDto),
+        solo = modeStatsMapper.map(from.soloDto),
+        duo = modeStatsMapper.map(from.duoDto),
+        squad = modeStatsMapper.map(from.squadDto)
     )
 }
 
-class ModeStatsDtoMapper : Mapper<ModeStatsDto, ModeStats> {
-    override fun map(from: ModeStatsDto) = ModeStats(
-        score = from.score,
-        wins = from.wins,
-        kills = from.kills,
-        kd = from.kd,
-        matches = from.matches
+class ModeStatsDtoMapper : Mapper<ModeStatsDto?, ModeStats> {
+    override fun map(from: ModeStatsDto?) = ModeStats(
+        score = from?.score,
+        wins = from?.wins,
+        kills = from?.kills,
+        kd = from?.kd,
+        matches = from?.matches
     )
 }

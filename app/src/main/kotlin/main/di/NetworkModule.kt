@@ -1,16 +1,15 @@
 package main.di
 
 import com.example.fortniteapp.BuildConfig
-import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import main.common.network.AuthInterceptor
-import main.common.network.Response
 import main.common.network.applyTrustAllSslSocketFactory
-import main.common.network.status.Status
-import main.common.network.status.StatusAdapter
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -28,19 +27,18 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val gson = GsonBuilder()
-            .registerTypeAdapter(Status::class.java, StatusAdapter())
-            .excludeFieldsWithoutExposeAnnotation()
-            .create()
+        val json = Json {
+            ignoreUnknownKeys = true // Игнорировать неизвестные поля в JSON
+            coerceInputValues = true // Использовать значения по умолчанию для null
+        }
 
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
-    /** убрать для прода .applyTrustAllSslSocketFactory() */
     @Provides
     @Singleton
     fun provideOkHttpClient(
@@ -51,7 +49,7 @@ object NetworkModule {
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .applyTrustAllSslSocketFactory()
+            .applyTrustAllSslSocketFactory() // TODO(потом убрать)
             .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()

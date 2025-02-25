@@ -1,6 +1,9 @@
 package main.common.network.status
 
-// Enum для статуса
+import kotlinx.serialization.Serializable
+
+/** Enum для статуса */
+@Serializable(with = StatusSerializer::class)
 enum class Status(val code: Int) {
     SUCCESS(200),
     BAD_REQUEST(400),
