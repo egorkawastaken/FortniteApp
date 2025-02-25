@@ -14,7 +14,6 @@ import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.cancellation.CancellationException
 
 interface BaseScopeContainer {
-    val processScope: CoroutineScope
     val mainScope: CoroutineScope
     val ioScope: CoroutineScope
 

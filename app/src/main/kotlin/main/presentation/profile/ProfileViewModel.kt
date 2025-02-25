@@ -2,6 +2,7 @@ package main.presentation.profile
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import main.common.base.BaseViewModel
+import main.common.utils.ScopeProvider
 import main.domain.profile.ProfileInteractor
 import main.presentation.profile.interactions.ProfileAction
 import main.presentation.profile.interactions.ProfileEvent
@@ -9,13 +10,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileInteractor: ProfileInteractor
-) : BaseViewModel<ProfileViewModel.State, ProfileAction, ProfileEvent>(
-    initialState = State(
-        buttonText = "load data",
-        type = State.Type.Loading
-    )
-) {
+    private val profileInteractor: ProfileInteractor,
+    scopeProvider: ScopeProvider
+) : BaseViewModel<ProfileViewModel.State, ProfileAction, ProfileEvent>(scopeProvider) {
+
+    init {
+        viewState = State(
+            buttonText = "load data",
+            type = State.Type.Data
+        )
+    }
 
     override fun onEvent(event: ProfileEvent) {
         when (event) {

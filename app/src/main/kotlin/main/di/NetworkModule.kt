@@ -7,6 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import main.common.network.AuthInterceptor
+import main.common.network.Response
+import main.common.network.applyTrustAllSslSocketFactory
 import main.common.network.status.Status
 import main.common.network.status.StatusAdapter
 import okhttp3.OkHttpClient
@@ -38,6 +40,7 @@ object NetworkModule {
             .build()
     }
 
+    /** убрать для прода .applyTrustAllSslSocketFactory() */
     @Provides
     @Singleton
     fun provideOkHttpClient(
@@ -48,6 +51,7 @@ object NetworkModule {
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .applyTrustAllSslSocketFactory()
             .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()

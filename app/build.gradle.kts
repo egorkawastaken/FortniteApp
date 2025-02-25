@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -19,16 +21,26 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        // Чтение значения из local.properties
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localProperties.load(localPropertiesFile.inputStream())
+        }
+
+        // Получение api.key
+        val apiKey = localProperties.getProperty("api.key", "")
+
         buildConfigField("String", "BASE_URL", "\"${project.properties["BASE_URL"]}\"")
 
         buildTypes {
             debug {
-                buildConfigField("String", "API_KEY", "\"${System.getenv("api.key")}\"")
+                buildConfigField("String", "API_KEY", "\"${apiKey}\"")
             }
             release {
                 isMinifyEnabled = false
                 proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-                buildConfigField("String", "API_KEY", "\"${System.getenv("api.key")}\"")
+                buildConfigField("String", "API_KEY", "\"${apiKey}\"")
             }
         }
     }
@@ -66,9 +78,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
 
     // Hilt для работы с ViewModel
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.process)
 
     testImplementation(libs.junit)

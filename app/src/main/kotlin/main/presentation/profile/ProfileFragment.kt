@@ -43,6 +43,7 @@ class ProfileFragment :
                 editText.setText(state.userId)
                 editText.setSelection(state.userId.length)
             }
+            button.text = state.buttonText
             sampleJson.text = state.text
         }
     }

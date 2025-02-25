@@ -4,20 +4,25 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ProfileDto(
+    @Expose
     @SerializedName("account")
     val accountDto: AccountDto,
 
-    @SerializedName("battle_pass")
+    @Expose
+    @SerializedName("battlePass")
     val battlePassDto: BattlePassDto,
 
-    @SerializedName("player_stats")
+    @Expose
+    @SerializedName("stats")
     val statsDto: StatsDto
 )
 
 data class AccountDto(
+    @Expose
     @SerializedName("id")
     val id: String,
 
+    @Expose
     @SerializedName("name")
     val name: String
 )
@@ -35,7 +40,19 @@ data class BattlePassDto(
 data class StatsDto(
     @Expose
     @SerializedName("all")
-    val all: GameModeStatsDto
+    val all: GameModeStatsDto,
+
+    @Expose
+    @SerializedName("keyboardMouse")
+    val keyboardMouse: GameModeStatsDto,
+
+    @Expose
+    @SerializedName("gamepad")
+    val gamepad: GameModeStatsDto,
+
+    @Expose
+    @SerializedName("touch")
+    val touch: GameModeStatsDto
 )
 
 data class GameModeStatsDto(
@@ -53,7 +70,11 @@ data class GameModeStatsDto(
 
     @Expose
     @SerializedName("squad")
-    val squad: ModeStatsDto
+    val squad: ModeStatsDto,
+
+    @Expose
+    @SerializedName("ltm")
+    val ltm: ModeStatsDto
 )
 
 data class ModeStatsDto(
@@ -62,12 +83,56 @@ data class ModeStatsDto(
     val score: Int,
 
     @Expose
+    @SerializedName("scorePerMin")
+    val scorePerMin: Double,
+
+    @Expose
+    @SerializedName("scorePerMatch")
+    val scorePerMatch: Double,
+
+    @Expose
     @SerializedName("wins")
     val wins: Int,
 
     @Expose
+    @SerializedName("top3")
+    val top3: Int,
+
+    @Expose
+    @SerializedName("top5")
+    val top5: Int,
+
+    @Expose
+    @SerializedName("top6")
+    val top6: Int,
+
+    @Expose
+    @SerializedName("top10")
+    val top10: Int,
+
+    @Expose
+    @SerializedName("top12")
+    val top12: Int,
+
+    @Expose
+    @SerializedName("top25")
+    val top25: Int,
+
+    @Expose
     @SerializedName("kills")
     val kills: Int,
+
+    @Expose
+    @SerializedName("killsPerMin")
+    val killsPerMin: Double,
+
+    @Expose
+    @SerializedName("killsPerMatch")
+    val killsPerMatch: Double,
+
+    @Expose
+    @SerializedName("deaths")
+    val deaths: Int,
 
     @Expose
     @SerializedName("kd")
@@ -75,5 +140,21 @@ data class ModeStatsDto(
 
     @Expose
     @SerializedName("matches")
-    val matches: Int
+    val matches: Int,
+
+    @Expose
+    @SerializedName("winRate")
+    val winRate: Double,
+
+    @Expose
+    @SerializedName("minutesPlayed")
+    val minutesPlayed: Int,
+
+    @Expose
+    @SerializedName("playersOutlived")
+    val playersOutlived: Int,
+
+    @Expose
+    @SerializedName("lastModified")
+    val lastModified: String
 )

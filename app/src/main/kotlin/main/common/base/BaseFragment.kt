@@ -54,7 +54,7 @@ abstract class BaseFragment<VBinding : ViewBinding,
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.viewStates.collect { state ->
-                    state.also { handleState(it) }
+                    state?.let { handleState(it) }
                 }
             }
         }
