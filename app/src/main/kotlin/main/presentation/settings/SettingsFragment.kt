@@ -1,4 +1,4 @@
-package main.settings
+package main.presentation.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
