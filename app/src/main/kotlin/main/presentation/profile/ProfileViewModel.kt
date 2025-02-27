@@ -33,10 +33,14 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun loadData() {
-        launch {
+        launch(onError = ::onError) {
             val text = profileInteractor.loadData(viewState.userId.orEmpty())
             viewState = viewState.copy(text = text.text)
         }
+    }
+
+    private fun onError(e: Throwable) {
+        sendAction(ProfileAction.ShowErrorToast(e.message ?: ""))
     }
 
     data class State(

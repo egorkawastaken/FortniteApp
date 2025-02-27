@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.fortniteapp.databinding.FrProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import main.common.base.BaseFragment
+import main.common.base.toast.ToastModel
 import main.presentation.profile.interactions.ProfileAction
 import main.presentation.profile.interactions.ProfileEvent
 
@@ -34,7 +35,9 @@ class ProfileFragment :
     }
 
     override fun handleAction(action: ProfileAction) {
-
+        when (action) {
+            is ProfileAction.ShowErrorToast -> showErrorToast(action)
+        }
     }
 
     override fun handleState(state: ProfileViewModel.State) {
@@ -46,5 +49,9 @@ class ProfileFragment :
             button.text = state.buttonText
             sampleJson.text = state.text
         }
+    }
+
+    private fun showErrorToast(action: ProfileAction.ShowErrorToast) {
+        binding.toast.showToast(message = action.message, type = ToastModel.ToastType.ERROR)
     }
 }

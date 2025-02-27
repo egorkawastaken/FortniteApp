@@ -34,13 +34,13 @@ data class StatsDto(
     val allDto: GameModeStatsDto,
 
     @SerialName("keyboardMouse")
-    val keyboardMouseDto: GameModeStatsDto,
+    val keyboardMouseDto: GameModeStatsDto? = null,
 
     @SerialName("gamepad")
-    val gamepadDto: GameModeStatsDto,
+    val gamepadDto: GameModeStatsDto? = null,
 
     @SerialName("touch")
-    val touchDto: GameModeStatsDto
+    val touchDto: GameModeStatsDto? = null
 )
 
 @Serializable
@@ -50,7 +50,7 @@ data class GameModeStatsDto(
     val overallDto: ModeStatsDto,
 
     @SerialName("solo")
-    val soloDto: ModeStatsDto,
+    val soloDto: ModeStatsDto? = null,
 
     @SerialName("duo")
     val duoDto: ModeStatsDto? = null,
