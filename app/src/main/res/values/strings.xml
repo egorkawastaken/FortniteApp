@@ -7,4 +7,7 @@
     <string name="battlepass">BattlePass</string>
     <string name="shop">Shop</string>
     <string name="settings">Settings</string>
+    <string name="no_profile">You have no profile selected yet. Please enter your profile.</string>
+    <string name="submit">SUBMIT</string>
+    <string name="invalid_profile_id">"Invalid User ID"</string>
 </resources>
