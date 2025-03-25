@@ -72,7 +72,6 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
     }
 
     companion object {
-        private const val SUBSCRIPTION_STOP_TIMEOUT = 5_000L
         private const val DEFAULT_EVENT_CAPACITY = 64
     }
 }

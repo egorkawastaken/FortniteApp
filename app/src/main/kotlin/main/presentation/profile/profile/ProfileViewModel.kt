@@ -7,7 +7,6 @@ import main.common.extension.getOrThrow
 import main.common.utils.ResourcesHandler
 import main.common.utils.ScopeProvider
 import main.domain.profile.ProfileInteractor
-import main.presentation.profile.empty.EmptyProfileViewModel
 import main.presentation.profile.mapper.StatsUiMapper
 import main.presentation.profile.model.AccountUiModel
 import main.presentation.profile.model.BattlePassUiModel
@@ -18,10 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
     private val resourcesHandler: ResourcesHandler,
     private val statsUiMapper: StatsUiMapper,
     private val interactor: ProfileInteractor,
+    savedStateHandle: SavedStateHandle,
     scopeProvider: ScopeProvider
 ) : BaseViewModel<ProfileViewModel.State, ProfileAction, ProfileEvent>(scopeProvider) {
 
