@@ -19,8 +19,8 @@ class LoadingView @JvmOverloads constructor(
         binding.loadingView.visibility = View.GONE
     }
 
-    fun show() {
-        binding.loadingView.visibility = View.VISIBLE
+    fun show(show: Boolean = true) {
+        binding.loadingView.visibility = if (show) View.VISIBLE else View.GONE
         bringToFront()
     }
 

@@ -3,13 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/profileFragment">
+    app:startDestination="@+id/emptyProfileFragment">
+
+    <fragment
+        android:id="@+id/emptyProfileFragment"
+        android:name="main.presentation.profile.empty.EmptyProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fr_empty_profile">
+
+        <action
+            android:id="@+id/empty_to_profile"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="main.presentation.profile.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fr_profile" />
+        android:name="main.presentation.profile.profile.ProfileFragment"
+        android:label="Profile">
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/battlePassFragment"

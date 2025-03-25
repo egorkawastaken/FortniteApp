@@ -3,4 +3,8 @@
     <dimen name="small_margin">12dp</dimen>
     <dimen name="default_drawable">64dp</dimen>
     <dimen name="edit_text_height">60dp</dimen>
+    <dimen name="default_corner_radius">12dp</dimen>
+    <dimen name="default_card_elevation">2dp</dimen>
+    <dimen name="xs_margin">4dp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
 </resources>

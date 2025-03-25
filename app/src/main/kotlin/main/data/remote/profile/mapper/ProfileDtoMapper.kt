@@ -26,11 +26,9 @@ class ProfileDtoMapper @Inject constructor(
         val stats = statsDtoMapper.map(from.statsDto)
 
         return Profile(
-            text = """
-                Account: ${account.name} (ID: ${account.id})
-                Battle Pass: Level ${battlePass.level}, Progress: ${battlePass.progress}%
-                Stats (All Modes): $stats
-            """.trimIndent()
+            account = account,
+            battlePass = battlePass,
+            stats = stats
         )
     }
 }
@@ -53,26 +51,46 @@ class StatsDtoMapper @Inject constructor(
     private val gameModeStatsMapper: GameModeStatsDtoMapper
 ) : Mapper<StatsDto, Stats> {
     override fun map(from: StatsDto) = Stats(
-        all = gameModeStatsMapper.map(from.allDto)
+        all = gameModeStatsMapper.map(from.allDto),
+        keyboardMouse = gameModeStatsMapper.map(from.keyboardMouseDto),
+        gamepad = gameModeStatsMapper.map(from.gamepadDto),
+        touch = gameModeStatsMapper.map(from.touchDto),
     )
 }
 
-class GameModeStatsDtoMapper @Inject constructor(private val modeStatsMapper: ModeStatsDtoMapper) :
-    Mapper<GameModeStatsDto, GameModeStats> {
-    override fun map(from: GameModeStatsDto) = GameModeStats(
-        overall = modeStatsMapper.map(from.overallDto),
-        solo = modeStatsMapper.map(from.soloDto),
-        duo = modeStatsMapper.map(from.duoDto),
-        squad = modeStatsMapper.map(from.squadDto)
+class GameModeStatsDtoMapper @Inject constructor(
+    private val modeStatsMapper: ModeStatsDtoMapper
+) : Mapper<GameModeStatsDto?, GameModeStats> {
+    override fun map(from: GameModeStatsDto?) = GameModeStats(
+        overall = modeStatsMapper.map(from?.overallDto),
+        solo = modeStatsMapper.map(from?.soloDto),
+        duo = modeStatsMapper.map(from?.duoDto),
+        squad = modeStatsMapper.map(from?.squadDto),
+        ltm = modeStatsMapper.map(from?.ltmDto)
     )
 }
 
 class ModeStatsDtoMapper : Mapper<ModeStatsDto?, ModeStats> {
     override fun map(from: ModeStatsDto?) = ModeStats(
         score = from?.score,
+        scorePerMin = from?.scorePerMin,
+        scorePerMatch = from?.scorePerMatch,
         wins = from?.wins,
+        top3 = from?.top3,
+        top5 = from?.top5,
+        top6 = from?.top6,
+        top10 = from?.top10,
+        top12 = from?.top12,
+        top25 = from?.top25,
         kills = from?.kills,
+        killsPerMin = from?.killsPerMin,
+        killsPerMatch = from?.killsPerMatch,
+        deaths = from?.deaths,
         kd = from?.kd,
-        matches = from?.matches
+        matches = from?.matches,
+        winRate = from?.winRate,
+        minutesPlayed = from?.minutesPlayed,
+        playersOutlived = from?.playersOutlived,
+        lastModified = from?.lastModified
     )
 }

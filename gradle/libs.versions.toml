@@ -1,5 +1,6 @@
 [versions]
 agp = "8.8.1"
+cardview = "1.0.0"
 hiltAndroid = "2.51.1"
 hiltAndroidCompiler = "2.51.1"
 kotlin = "2.1.10"
@@ -11,17 +12,22 @@ appcompat = "1.7.0"
 kotlinxSerializationJson = "1.7.3"
 loggingInterceptor = "4.10.0"
 material = "1.12.0"
-constraintlayout = "2.2.0"
+constraintlayout = "2.2.1"
 lifecycleLivedataKtx = "2.8.7"
 lifecycleViewmodelKtx = "2.8.7"
-navigationFragmentKtx = "2.8.7"
-navigationUiKtx = "2.8.7"
+navigationUiKtx = "2.8.9"
+navigationFragmentKtx = "2.8.9"
 lifecycleProcess = "2.8.7"
+recyclerview = "1.4.0"
+recyclerviewSelection = "1.1.0"
 retrofit = "2.9.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 
 [libraries]
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-recyclerview-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recyclerviewSelection" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }

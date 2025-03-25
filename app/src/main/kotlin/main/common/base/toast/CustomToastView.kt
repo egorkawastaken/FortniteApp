@@ -25,7 +25,7 @@ class CustomToastView @JvmOverloads constructor(
     init {
         visibility = View.GONE
 
-        val defaultMargin = context.resources.getDimensionPixelSize(R.dimen.default_margin)
+        val defaultMargin = context.resources.getDimensionPixelSize(R.dimen.default_card_elevation)
 
         elevation = defaultMargin.dpToPx()
         setPadding(defaultMargin, defaultMargin, defaultMargin, defaultMargin)

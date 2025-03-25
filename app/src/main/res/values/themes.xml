@@ -4,6 +4,7 @@
         <item name="android:toolbarStyle">@style/FortniteCustomToolbar</item>
         <item name="android:buttonStyle">@style/FortniteCustomButton</item>
         <item name="colorPrimary">@color/blue</item>
+        <item name="android:fitsSystemWindows">true</item>
         <item name="colorPrimaryDark">@color/gray</item>
         <item name="progressBarStyle">@style/FortniteCustomProgressBar</item>
         <item name="colorControlHighlight">@color/blue</item>

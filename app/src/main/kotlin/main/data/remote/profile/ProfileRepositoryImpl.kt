@@ -1,6 +1,5 @@
 package main.data.remote.profile
 
-import android.util.Log
 import main.common.network.Response
 import main.data.remote.profile.mapper.ProfileDtoMapper
 import main.domain.profile.ProfileRepository
@@ -14,8 +13,6 @@ class ProfileRepositoryImpl @Inject constructor(
 
     override suspend fun loadData(accountId: String): Response<Profile> {
         val responseDTO = api.getAccountStats(accountId)
-        Log.d("DEM => ", "$responseDTO")
-        val response = responseDTO.map(profileDtoMapper)
-        return response
+        return responseDTO.map(profileDtoMapper)
     }
 }

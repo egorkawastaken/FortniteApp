@@ -2,19 +2,16 @@ package main.common.base
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.stateIn
 import main.common.utils.BaseScopeContainer
 import main.common.utils.ScopeProvider
 
@@ -60,14 +57,18 @@ abstract class BaseViewModel<STATE : Any, ACTION : Any, EVENT : Any>(
         Log.e("BaseViewModel", "Error occurred", throwable)
     }
 
-    fun sendEvent(event: EVENT) {
-        _events.tryEmit(event)
-    }
-
     private fun subscribeToEvents() {
         launch {
             _events.collect { event -> onEvent(event) }
         }
+    }
+
+    fun getString() {
+
+    }
+
+    fun sendEvent(event: EVENT) {
+        _events.tryEmit(event)
     }
 
     companion object {

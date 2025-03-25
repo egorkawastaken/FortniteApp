@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.launch
 
@@ -73,5 +78,9 @@ abstract class BaseFragment<VBinding : ViewBinding,
     /** Отправка EVENT */
     protected fun sendEvent(event: EVENT) {
         viewModel.sendEvent(event)
+    }
+
+    protected fun navigateWithAction(action: NavDirections) {
+        findNavController().navigate(action)
     }
 }

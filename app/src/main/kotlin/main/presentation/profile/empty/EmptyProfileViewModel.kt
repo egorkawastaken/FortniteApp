@@ -1,50 +1,51 @@
-package main.presentation.profile
+package main.presentation.profile.empty
 
 import com.example.fortniteapp.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import main.common.base.BaseViewModel
 import main.common.utils.ResourcesHandler
 import main.common.utils.ScopeProvider
-import main.domain.profile.ProfileInteractor
-import main.presentation.profile.interactions.ProfileAction
-import main.presentation.profile.interactions.ProfileEvent
+import main.presentation.profile.empty.interactions.EmptyProfileAction
+import main.presentation.profile.empty.interactions.EmptyProfileEvent
+import main.presentation.profile.model.AccountUiModel
+import main.presentation.profile.model.BattlePassUiModel
+import main.presentation.profile.model.StatsUiModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
-    private val profileInteractor: ProfileInteractor,
+class EmptyProfileViewModel @Inject constructor(
     private val resourcesHandler: ResourcesHandler,
     scopeProvider: ScopeProvider
-) : BaseViewModel<ProfileViewModel.State, ProfileAction, ProfileEvent>(scopeProvider) {
+) : BaseViewModel<EmptyProfileViewModel.State, EmptyProfileAction, EmptyProfileEvent>(scopeProvider) {
 
     init {
         viewState = State(
-            type = State.Type.Init,
+            type = State.Type.Data,
             noProfileTitle = resourcesHandler.getString(R.string.no_profile),
             submitButton = resourcesHandler.getString(R.string.submit)
         )
     }
 
-    override fun onEvent(event: ProfileEvent) {
+    override fun onEvent(event: EmptyProfileEvent) {
         when (event) {
-            is ProfileEvent.UserIdChanged -> userIdChanged(event.text)
-            ProfileEvent.SubmitButtonPressed -> onSubmitPressed()
+            is EmptyProfileEvent.UserIdChanged -> userIdChanged(event.text)
+            EmptyProfileEvent.SubmitButtonPressed -> onSubmitPressed()
         }
     }
 
     private fun userIdChanged(id: String?) {
-        viewState = viewState.copy(userID = id.orEmpty())
+        viewState = viewState.copy(userID = id?.trim().orEmpty())
     }
 
     private fun onSubmitPressed() {
         viewState = viewState.copy(type = State.Type.Loading)
         if (validateUserId(viewState.userID)) {
-            loadUserData()
+           sendAction(EmptyProfileAction.OpenProfile(viewState.userID))
         } else {
-            sendAction(ProfileAction.ShowErrorToast(resourcesHandler.getString(R.string.invalid_profile_id)))
-            sendAction(ProfileAction.ShowInvalidUserId)
-            viewState = viewState.copy(type = State.Type.Init)
+            sendAction(EmptyProfileAction.ShowErrorToast(resourcesHandler.getString(R.string.invalid_profile_id)))
+            sendAction(EmptyProfileAction.ShowInvalidUserId)
         }
+        viewState = viewState.copy(type = State.Type.Data)
     }
 
     /**
@@ -62,26 +63,16 @@ class ProfileViewModel @Inject constructor(
         return regex.matches(id)
     }
 
-    private fun loadUserData() {
-        launch(onError = ::onError) {
-            val profile = profileInteractor.loadData(viewState.userID)
-            viewState = viewState.copy(type = State.Type.Init)
-        }
-    }
-
-    private fun onError(e: Throwable) {
-        sendAction(ProfileAction.ShowErrorToast(e.message ?: ""))
-        viewState = viewState.copy(type = State.Type.Init)
-    }
-
     data class State(
         val type: Type,
         val noProfileTitle: String,
         val userID: String = "",
-        val submitButton: String
+        val submitButton: String,
+        val account: AccountUiModel? = null,
+        val battlePass: BattlePassUiModel? = null,
+        val stats: StatsUiModel? = null
     ) {
         sealed interface Type {
-            data object Init : Type
             data object Data : Type
             data object Loading : Type
         }

@@ -7,6 +7,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
+    id("androidx.navigation.safeargs.kotlin") version "2.8.9"
 }
 
 android {
@@ -67,9 +68,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
-
-    // Material Design
+    implementation(libs.androidx.cardview)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.recyclerview.selection)
 
     // Dagger Hilt
     implementation(libs.hilt.android)

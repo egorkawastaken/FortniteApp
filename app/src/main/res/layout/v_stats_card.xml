@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin"
+    app:cardBackgroundColor="@color/blue"
+    app:cardCornerRadius="@dimen/default_corner_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/stats_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:paddingStart="@dimen/default_margin"
+            android:paddingTop="@dimen/xs_margin"
+            android:text="SOLO"
+            android:textColor="@color/yellow"
+            tools:text="SOLO" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stats_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingHorizontal="@dimen/xs_margin"
+            android:paddingBottom="@dimen/xs_margin"
+            tools:listitem="@layout/v_stats" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
