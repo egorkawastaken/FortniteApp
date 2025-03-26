@@ -3,29 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/profileFragment">
+    app:startDestination="@+id/emptyProfileFragment">
+
+    <fragment
+        android:id="@+id/emptyProfileFragment"
+        android:name="main.presentation.profile.empty.EmptyProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fr_empty_profile">
+
+        <action
+            android:id="@+id/empty_to_profile"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="main.profile.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fr_profile" />
+        android:name="main.presentation.profile.profile.ProfileFragment"
+        android:label="Profile">
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/battlePassFragment"
-        android:name="main.battlepass.BattlePassFragment"
+        android:name="main.presentation.battlepass.BattlePassFragment"
         android:label="Battle Pass"
         tools:layout="@layout/fr_battle_pass" />
 
     <fragment
         android:id="@+id/shopFragment"
-        android:name="main.shop.ShopFragment"
+        android:name="main.presentation.shop.ShopFragment"
         android:label="Shop"
         tools:layout="@layout/fr_shop" />
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="main.settings.SettingsFragment"
+        android:name="main.presentation.settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fr_settings" />
 </navigation>

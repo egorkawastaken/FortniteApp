@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Анимация при фокусе -->
+    <item android:state_focused="true">
+        <objectAnimator
+            android:propertyName="boxStrokeWidth"
+            android:duration="200"
+            android:valueFrom="2"
+            android:valueTo="4"
+            android:valueType="intType"/>
+    </item>
+    <!-- Анимация при потере фокуса -->
+    <item>
+        <objectAnimator
+            android:propertyName="boxStrokeWidth"
+            android:duration="200"
+            android:valueFrom="4"
+            android:valueTo="2"
+            android:valueType="intType"/>
+    </item>
+</selector>
