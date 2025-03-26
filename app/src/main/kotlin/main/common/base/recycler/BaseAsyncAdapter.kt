@@ -16,7 +16,6 @@ abstract class BaseAsyncAdapter<T, VH : RecyclerView.ViewHolder>(
 
     open fun getItems(): List<T> = differ.currentList
     open fun getItem(position: Int): T = getItems()[position]
-    open fun getItemOrNull(position: Int): T? = getItems().getOrNull(position)
     override fun getItemCount(): Int = differ.currentList.size
 
     /**
